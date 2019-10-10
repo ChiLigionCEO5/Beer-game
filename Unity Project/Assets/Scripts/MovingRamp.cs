@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class MovingRamp : MonoBehaviour
 {
-    private float moveSpeed = 0.1f; 
+    public float moveSpeed = 1f;
+
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rigidbody;
+    private float verrticalInput; 
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("test");
-        // transform.Translate(5, 0, 0);
+        rigidbody = GetComponent<Rigidbody2D>();
+        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red; 
     }
 
-    // Update is called once per frame
-    void Update()
+    // Use fixed update for physics dode, because we need to be
+    // careful about how often we call expensive, hardware intensive
+    // physics stuff.
+
+    private void FixedUpdate()
     {
-        // If the player presses up arrow, we move the square up.
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(0, moveSpeed, 0);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(0, -moveSpeed, 0);
-        }
+        verrticalInput = Input.GetAxis("Vertical");
+        rigidbody.velocity = new Vector2(0, verrticalInput* moveSpeed);
     }
 }
