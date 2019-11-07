@@ -6,11 +6,21 @@ using UnityEngine;
 /// </summary>
 public class Goal : MonoBehaviour
 {
+    private AudioSource audioSource;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+    public GameObject winText;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Touch trigger.");
         if (collision.tag == "Player")
         {
+
+            winText.SetActive(true);
+            // cue sound effect here
+            audioSource.Play();
             Debug.Log("The player has entered the goal.");
 
         }
