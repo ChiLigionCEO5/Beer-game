@@ -28,7 +28,10 @@ public class MovingRamp : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        rigidbody.velocity = new Vector2(0, verrticalInput* moveSpeed);
+        if (!Gameover.IsGameOver)
+        {
+            rigidbody.velocity = new Vector2(0, verrticalInput * moveSpeed);
+        }
+       
     }
 }

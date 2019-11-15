@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Touch trigger.");
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !Gameover.IsGameOver)
         {
 
             winText.SetActive(true);
